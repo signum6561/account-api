@@ -9,9 +9,11 @@ class Account extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'email',
         'username',
         'fullname',
         'department',
         'position',
+        'fake_create_at',
     ];
 }

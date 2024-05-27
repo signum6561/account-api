@@ -20,10 +20,12 @@ class AccountFactory extends Factory
     public function definition(): array
     {
         return [
+            'email' => $this->faker->email(),
             'username' => $this->faker->userName(),
             'fullname' => $this->faker->name(),
             'department' => $this->faker->randomElement(['Sales', 'Marketing', 'Software']),
-            'position' => $this->faker->randomElement(['Dev', 'Sale'])
+            'position' => $this->faker->randomElement(['Dev', 'Sale']),
+            'fake_create_at' => $this->faker->dateTimeBetween('-2 year')
         ];
     }
 }

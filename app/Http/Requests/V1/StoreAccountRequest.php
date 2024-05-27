@@ -23,17 +23,18 @@ class StoreAccountRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'email' => ['sometimes', 'required'],
             'username' => ['required'],
             'fullname' => ['required'],
             'department' => ['required', Rule::in(['Sales', 'Marketing', 'Software'])],
-            'position' => ['required', Rule::in(['Dev', 'Sale'])]
+            'position' => ['required', Rule::in(['Dev', 'Sale'])],
+            'createAt' => ['required'],
         ];
     }
-
     protected function prepareForValidation()
     {
         $this->merge([
-            'created_at' => $this->createdAt
+            'fake_create_at' => $this->createAt
         ]);
     }
 }

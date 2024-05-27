@@ -8,15 +8,18 @@ use App\Http\Resources\V1\AccountResource;
 use App\Http\Resources\V1\AccountCollection;
 use App\Http\Requests\V1\StoreAccountRequest;
 use App\Http\Requests\V1\UpdateAccountRequest;
+use App\Services\V1\AccountQuery;
+use Illuminate\Http\Request;
 
 class AccountController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return new AccountCollection(Account::paginate());
+        $query = new AccountQuery();
+        return new AccountCollection($query->transform($request));
     }
 
     /**

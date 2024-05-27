@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('accounts', function (Blueprint $table) {
             $table->id();
+            $table->string('email');
             $table->string('username');
             $table->string('fullname');
             $table->string('department');
             $table->string('position');
+            $table->datetime('fake_create_at')->nullable();
             $table->timestamps();
         });
     }

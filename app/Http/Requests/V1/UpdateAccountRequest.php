@@ -28,20 +28,30 @@ class UpdateAccountRequest extends FormRequest
         if($method == 'PUT')
         {
             return [
+                'email' => ['required'],
                 'username' => ['required'],
                 'fullname' => ['required'],
                 'department' => ['required', Rule::in(['Sales', 'Marketing', 'Software'])],
-                'position' => ['required', Rule::in(['Dev', 'Sale'])]
+                'position' => ['required', Rule::in(['Dev', 'Sale'])],
+                'createAt' => ['required'],
             ];
         }
         else
         {
             return [
+                'email' => ['sometimes', 'required'],
                 'username' => ['sometimes', 'required'],
                 'fullname' => ['sometimes', 'required'],
                 'department' => ['sometimes', 'required', Rule::in(['Sales', 'Marketing', 'Software'])],
-                'position' => ['sometimes', 'required', Rule::in(['Dev', 'Sale'])]
+                'position' => ['sometimes', 'required', Rule::in(['Dev', 'Sale'])],
+                'createAt' => ['sometimes', 'required'],
             ];
         }
+    }
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'fake_create_at' => $this->createAt
+        ]);
     }
 }
